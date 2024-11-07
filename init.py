@@ -39,13 +39,13 @@ class Initiator:
     @classmethod
     def add_suites_and_validation_definitions(cls) -> None:
         """Add suites and validation definitions to the data context."""
-        cls.add_distribution_suite()
-        cls.add_missingness_suite()
-        cls.add_schema_suite()
-        cls.add_volume_suite()
+        cls.distribution_suite()
+        cls.missingness_suite()
+        cls.schema_suite()
+        cls.volume_suite()
 
     @classmethod
-    def add_distribution_suite(cls) -> None:
+    def distribution_suite(cls) -> None:
         """Add expectation suite to the data context."""
         # Define an expectation suite
         suite = cls.context.suites.add(gx.ExpectationSuite(name="distribution"))
@@ -60,7 +60,7 @@ class Initiator:
         ))
 
     @classmethod
-    def add_missingness_suite(cls) -> None:
+    def missingness_suite(cls) -> None:
         """Define an expectation suite."""
         suite = cls.context.suites.add(gx.ExpectationSuite(name="missingness"))
 
@@ -77,9 +77,8 @@ class Initiator:
             data=cls.batch_definition, suite=suite, name="missingness",
         ))
 
-
     @classmethod
-    def add_schema_suite(cls) -> None:
+    def schema_suite(cls) -> None:
         """Define an expectation suite."""
         suite = cls.context.suites.add(gx.ExpectationSuite(name="schema"))
 
@@ -96,9 +95,8 @@ class Initiator:
             data=cls.batch_definition, suite=suite, name="schema",
         ))
 
-
     @classmethod
-    def add_volume_suite(cls) -> None:
+    def volume_suite(cls) -> None:
         """Define volume expectation suite."""
         suite = cls.context.suites.add(gx.ExpectationSuite(name="volume"))
 
