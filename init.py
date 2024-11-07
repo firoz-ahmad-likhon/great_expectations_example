@@ -21,6 +21,7 @@ class Initiator:
         cls.context.enable_analytics(enable=False)
         cls.add_data_assets()
         cls.add_suites_and_validation_definitions()
+        cls.add_checkpoint()
 
     @classmethod
     def add_data_assets(cls) -> None:
@@ -108,6 +109,34 @@ class Initiator:
         # Create a Validation Definition and Add to the Data Context
         cls.context.validation_definitions.add(gx.ValidationDefinition(
             data=cls.batch_definition, suite=suite, name="volume",
+        ))
+
+    @classmethod
+    def add_checkpoint(cls) -> None:
+        """Add checkpoints to the data context."""
+        cls.statistical_checkpoint()
+        cls.completeness_checkpoint()
+
+    @classmethod
+    def statistical_checkpoint(cls) -> None:
+        """Add checkpoint to the data context."""
+        cls.context.checkpoints.add(gx.Checkpoint(
+            name="statistical_checkpoint",
+            validation_definitions=[
+                cls.context.validation_definitions.get("distribution"),
+            ],
+        ))
+
+    @classmethod
+    def completeness_checkpoint(cls) -> None:
+        """Add checkpoint to the data context."""
+        cls.context.checkpoints.add(gx.Checkpoint(
+            name="completeness_checkpoint",
+            validation_definitions=[
+                cls.context.validation_definitions.get("missingness"),
+                cls.context.validation_definitions.get("schema"),
+                cls.context.validation_definitions.get("volume"),
+            ],
         ))
 
 
