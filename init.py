@@ -17,7 +17,7 @@ class Initiator:
         # Check if the project directory exists, and delete it if it does
         if os.path.exists(cls.PROJECT_DIR):
             shutil.rmtree(cls.PROJECT_DIR)  # Delete the directory and all its contents
-        cls.context = gx.get_context(mode="file", project_root_dir=Initiator.PROJECT_DIR)
+        cls.context = gx.get_context(mode="file", project_root_dir=cls.PROJECT_DIR)
         cls.context.enable_analytics(enable=False)
         cls.add_data_assets()
         cls.add_suites_and_validation_definitions()
@@ -27,14 +27,14 @@ class Initiator:
     def add_data_assets(cls) -> None:
         """Add data assets and batch definition to the data context."""
         # Add a pandas datasource
-        data_source = cls.context.data_sources.add_pandas(name=Initiator.SOURCE_NAME)
+        data_source = cls.context.data_sources.add_pandas(name=cls.SOURCE_NAME)
 
         # Add a DataFrame asset for transactions
-        data_asset = data_source.add_dataframe_asset(name=Initiator.ASSET_NAME)
+        data_asset = data_source.add_dataframe_asset(name=cls.ASSET_NAME)
 
         # Add a Batch Definition to the Data Asset
         cls.batch_definition = data_asset.add_batch_definition_whole_dataframe(
-            Initiator.BATCH_NAME,
+            cls.BATCH_NAME,
         )
 
     @classmethod
