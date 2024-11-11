@@ -4,7 +4,7 @@ import great_expectations as gx
 
 
 class Initiator:
-    """Initialize the Great Expectations context and add data assets, suites, and validation definitions."""
+    """Initialize the Great Expectations context and add data assets, suites, validation definitions and checkpoints."""
 
     PROJECT_DIR = "./gx"
     SOURCE_NAME = "pandas"
@@ -25,7 +25,7 @@ class Initiator:
 
     @classmethod
     def add_data_assets(cls) -> None:
-        """Add data assets, suites, and validation definitions."""
+        """Add data assets and batch definition to the data context."""
         # Add a pandas datasource
         data_source = cls.context.data_sources.add_pandas(name=Initiator.SOURCE_NAME)
 
@@ -47,7 +47,7 @@ class Initiator:
 
     @classmethod
     def distribution_suite(cls) -> None:
-        """Add expectation suite to the data context."""
+        """Define statistical expectation suite to the data context."""
         # Define an expectation suite
         suite = cls.context.suites.add(gx.ExpectationSuite(name="distribution"))
 
@@ -62,7 +62,7 @@ class Initiator:
 
     @classmethod
     def missingness_suite(cls) -> None:
-        """Define an expectation suite."""
+        """Define completeness expectation suite to the data context."""
         suite = cls.context.suites.add(gx.ExpectationSuite(name="missingness"))
 
         # Add expectations to the suite
@@ -80,7 +80,7 @@ class Initiator:
 
     @classmethod
     def schema_suite(cls) -> None:
-        """Define an expectation suite."""
+        """Define validity expectation suite to the data context."""
         suite = cls.context.suites.add(gx.ExpectationSuite(name="schema"))
 
         # Add expectations to the suite
@@ -98,7 +98,7 @@ class Initiator:
 
     @classmethod
     def volume_suite(cls) -> None:
-        """Define volume expectation suite."""
+        """Define volume expectation suite to the data context."""
         suite = cls.context.suites.add(gx.ExpectationSuite(name="volume"))
 
         # Add expectations to the suite
@@ -119,7 +119,7 @@ class Initiator:
 
     @classmethod
     def statistical_checkpoint(cls) -> None:
-        """Add checkpoint to the data context."""
+        """Define statistical checkpoint to the data context."""
         cls.context.checkpoints.add(gx.Checkpoint(
             name="statistical_checkpoint",
             validation_definitions=[
@@ -129,7 +129,7 @@ class Initiator:
 
     @classmethod
     def completeness_checkpoint(cls) -> None:
-        """Add checkpoint to the data context."""
+        """Define completeness, validity and volume checkpoint to the data context."""
         cls.context.checkpoints.add(gx.Checkpoint(
             name="completeness_checkpoint",
             validation_definitions=[
