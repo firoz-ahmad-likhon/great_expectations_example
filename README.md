@@ -19,3 +19,7 @@ The project consists of two files:
 1. `init.py`: This file initializes Great Expectations and creates the data context.
 2. `main.py`: This file runs the validation and generates the data documentation.
 3. `data`: This folder contains the sample data to be validated.
+
+### Activate pre-commit hook
+Install `pre-commit` by running
+`pip install pre-commit` and then run `pre-commit install` to install the hooks.
