@@ -14,7 +14,7 @@ def run() -> None:
     df = pd.read_csv('Data/transactions.csv')
 
     # Get the Great Expectations context
-    context = gx.get_context(mode="file", project_root_dir="./gx")
+    context = gx.get_context(mode="file")
 
     run_id = RunIdentifier(run_name="Quality", run_time=datetime.now(tz=timezone.utc).strftime('%Y%m%dT%H%M%S.%f'))
 

@@ -11,8 +11,8 @@ To install the project, follow the steps below:
 
 ### Running the project
 To run the project, follow the steps below:
-1. Initialize Great Expectations using `python -m init.py`
-2. Run the validation using `python -m main.py`
+1. Initialize Great Expectations using `python init.py`
+2. Run the validation using `python main.py`
 
 ### Understanding the project
 The project consists of two files:

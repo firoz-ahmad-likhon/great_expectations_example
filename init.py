@@ -6,7 +6,7 @@ import great_expectations as gx
 class Initiator:
     """Initialize the Great Expectations context and add data assets, suites, validation definitions and checkpoints."""
 
-    PROJECT_DIR = "./gx"
+    GX_DIR = "./gx"
     SOURCE_NAME = "pandas"
     ASSET_NAME = "transactions"
     BATCH_NAME = "transactions batch"
@@ -15,9 +15,9 @@ class Initiator:
     def initialize(cls) -> None:
         """Initialize the Great Expectations context."""
         # Check if the project directory exists, and delete it if it does
-        if os.path.exists(cls.PROJECT_DIR):
-            shutil.rmtree(cls.PROJECT_DIR)  # Delete the directory and all its contents
-        cls.context = gx.get_context(mode="file", project_root_dir=cls.PROJECT_DIR)
+        if os.path.exists(cls.GX_DIR):
+            shutil.rmtree(cls.GX_DIR)  # Delete the directory and all its contents
+        cls.context = gx.get_context(mode="file")
         cls.context.enable_analytics(enable=False)
         cls.add_data_assets()
         cls.add_suites_and_validation_definitions()
