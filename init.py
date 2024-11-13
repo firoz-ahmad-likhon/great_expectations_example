@@ -4,10 +4,11 @@ import shutil
 import great_expectations as gx
 
 
-class Initiator:
+class GXInitiator:
     """Initialize the Great Expectations context and add data assets, suites, validation definitions and checkpoints."""
 
-    GX_DIR = "./gx"
+    PROJECT_DIR = os.path.join('./', "quality")
+    GX_DIR = os.path.join(PROJECT_DIR, "./gx")
     SOURCE_NAME = "pandas"
     ASSET_NAME = "transactions"
     BATCH_NAME = "transactions batch"
@@ -21,7 +22,7 @@ class Initiator:
 
         # Initialize context only if the project directory does not exist
         if not os.path.exists(cls.GX_DIR):
-            cls.context = gx.get_context(mode="file")
+            cls.context = gx.get_context(mode="file", project_root_dir=cls.PROJECT_DIR)
             cls.context.enable_analytics(enable=False)
             cls.add_data_assets()
             cls.add_suites_and_validation_definitions()
@@ -150,4 +151,4 @@ if __name__ == "__main__":
                         help="Specify whether to recreate the project directory or leave it as is.")
     args = parser.parse_args()
 
-    Initiator.initialize(mode=args.mode)
+    GXInitiator.initialize(mode=args.mode)
