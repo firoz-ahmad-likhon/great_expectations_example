@@ -13,7 +13,7 @@ To install the project, follow the steps below:
 To run the project, follow the steps below:
 1. Initialize Great Expectations using `python init.py`
 2. Run the validation using `python main.py`
-
+3. To recreate the ge run: `python init.py --mode recreate`
 ### Understanding the project
 The project consists of two files:
 1. `init.py`: This file initializes Great Expectations and creates the data context.
