@@ -2,7 +2,9 @@ import argparse
 import os
 import shutil
 import great_expectations as gx
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class GXInitiator:
     """Initialize the Great Expectations context and add data assets, suites, validation definitions and checkpoints."""
@@ -35,9 +37,22 @@ class GXInitiator:
         if not os.path.exists(cls.GX_DIR):
             cls.context = gx.get_context(mode="file", project_root_dir=cls.PROJECT_DIR)
             cls.context.enable_analytics(enable=False)
+            cls.add_validation_results_store_backend()
             cls.add_data_assets()
             cls.add_suites_and_validation_definitions()
             cls.add_checkpoint()
+
+    @classmethod
+    def add_validation_results_store_backend(cls) -> None:
+        """Configure a database store for storing validation results."""
+        cls.context.add_store("validation_results_store", {
+            "class_name": "ValidationResultsStore",
+            "store_backend": {
+                "class_name": "DatabaseStoreBackend",
+                "url": os.environ['POSTGRES_CONNECTION_STRING'],
+                "table_name": os.environ['TABLE_NAME'],
+            },
+        })
 
     @classmethod
     def add_data_assets(cls) -> None:
