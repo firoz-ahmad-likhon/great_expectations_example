@@ -8,6 +8,7 @@ To install the project, follow the steps below:
 2. Create a virtual environment using `python -m venv venv`
 3. Activate the virtual environment using `source venv/bin/activate` or `venv\Scripts\activate` on Windows
 4. Install the required packages using `pip install -r requirements.txt`
+5. Copy `.env-example` to `.env` and update the values as per your environment.
 
 ### Running the project
 To run the project, follow the steps below:
