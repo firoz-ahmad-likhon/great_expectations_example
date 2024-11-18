@@ -12,6 +12,11 @@ class GXInitiator:
     SOURCE_NAME = "pandas"
     ASSET_NAME = "transactions"
     BATCH_NAME = "transactions batch"
+    ACTIONS = [
+        gx.checkpoint.actions.UpdateDataDocsAction(
+            name="Automatically data docs generation",
+        ),
+    ]
 
     @classmethod
     def initialize(cls, mode: str) -> None:
@@ -136,6 +141,7 @@ class GXInitiator:
             validation_definitions=[
                 cls.context.validation_definitions.get("distribution"),
             ],
+            actions=cls.ACTIONS,
         ))
 
     @classmethod
@@ -148,6 +154,7 @@ class GXInitiator:
                 cls.context.validation_definitions.get("schema"),
                 cls.context.validation_definitions.get("volume"),
             ],
+            actions=cls.ACTIONS,
         ))
 
 

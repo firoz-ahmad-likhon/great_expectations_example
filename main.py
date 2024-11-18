@@ -30,13 +30,9 @@ def run() -> None:
     )
     # Print out the final validation results
     logging.info(f"Validation results: {statistical_result.success and completeness_result.success}")
-    # Build the Data Docs
-    context.build_data_docs()
+
     # Print out the docs URL
     logging.info(f"Data Docs available at: {context.get_docs_sites_urls()[0]['site_url']}")
-
-    # todo: Add actions to checkpoints to trigger notifications and alerts
-    # todo: Add another data source
 
 if __name__ == '__main__':
     run()
