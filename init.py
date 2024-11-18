@@ -49,8 +49,8 @@ class GXInitiator:
             "class_name": "ValidationResultsStore",
             "store_backend": {
                 "class_name": "DatabaseStoreBackend",
-                "url": os.environ['POSTGRES_CONNECTION_STRING'],
-                "table_name": os.environ['TABLE_NAME'],
+                "url": os.environ['GX_POSTGRES_CONNECTION_STRING'],
+                "table_name": os.environ['GX_TABLE_NAME'],
             },
         })
 
