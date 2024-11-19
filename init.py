@@ -9,16 +9,18 @@ load_dotenv()
 class GXInitiator:
     """Initialize the Great Expectations context and add data assets, suites, validation definitions and checkpoints."""
 
-    PROJECT_DIR = os.path.join('./', "quality")
-    GX_DIR = os.path.join(PROJECT_DIR, "./gx")
+    # Define constants
+    PROJECT_DIR = os.path.join(os.environ['AIRFLOW_HOME'], "quality")
+    GX_DIR = os.path.join(PROJECT_DIR, "gx")
     SOURCE_NAME = "pandas"
     ASSET_NAME = "transactions"
     BATCH_NAME = "transactions batch"
-    DOC_BASE_DIR = "uncommitted/data_docs/transactions_docs/"
+    INGESTION_TIME_SITE_NAME = "ingestion_time_site"
+    DOC_BASE_DIR_INGESTION_TIME = "uncommitted/data_docs/" + INGESTION_TIME_SITE_NAME + "/"
     ACTIONS = [
         gx.checkpoint.actions.UpdateDataDocsAction(
             name="Automatically data docs generation",
-            site_names=["transactions_docs"],
+            site_names=[INGESTION_TIME_SITE_NAME],
         ),
     ]
 
@@ -32,6 +34,7 @@ class GXInitiator:
                 - 'init': To initialize a new context.
 
         """
+        # Check mode and delete project directory if mode=recreate
         if mode == "recreate" and os.path.exists(cls.GX_DIR):
             shutil.rmtree(cls.GX_DIR)  # Delete the directory and all its contents
 
@@ -49,7 +52,7 @@ class GXInitiator:
     def add_data_docs_site(cls) -> None:
         """Add transactions data docs site to the data context."""
         cls.context.add_data_docs_site(
-            site_name="transactions_docs",
+            site_name=cls.INGESTION_TIME_SITE_NAME,
             site_config={
                 "class_name": "SiteBuilder",
                 "site_index_builder": {
@@ -57,7 +60,7 @@ class GXInitiator:
                 },
                 "store_backend": {
                     "class_name": "TupleFilesystemStoreBackend",
-                    "base_directory": cls.DOC_BASE_DIR,
+                    "base_directory": cls.DOC_BASE_DIR_INGESTION_TIME,
                 },
             },
         )
@@ -191,7 +194,6 @@ class GXInitiator:
             ],
             actions=cls.ACTIONS,
         ))
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Initialize Great Expectations context.")
