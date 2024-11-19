@@ -39,23 +39,28 @@ class GXInitiator:
         if not os.path.exists(cls.GX_DIR):
             cls.context = gx.get_context(mode="file", project_root_dir=cls.PROJECT_DIR)
             cls.context.enable_analytics(enable=False)
-            cls.context.add_data_docs_site(
-                site_name="transactions_docs",
-                site_config={
-                    "class_name": "SiteBuilder",
-                    "site_index_builder": {
-                        "class_name": "DefaultSiteIndexBuilder",
-                    },
-                    "store_backend": {
-                        "class_name": "TupleFilesystemStoreBackend",
-                        "base_directory": cls.DOC_BASE_DIR,
-                    },
-                },
-            )
+            cls.add_data_docs_site()
             cls.add_validation_results_store_backend()
             cls.add_data_assets()
             cls.add_suites_and_validation_definitions()
             cls.add_checkpoint()
+
+    @classmethod
+    def add_data_docs_site(cls) -> None:
+        """Add transactions data docs site to the data context."""
+        cls.context.add_data_docs_site(
+            site_name="transactions_docs",
+            site_config={
+                "class_name": "SiteBuilder",
+                "site_index_builder": {
+                    "class_name": "DefaultSiteIndexBuilder",
+                },
+                "store_backend": {
+                    "class_name": "TupleFilesystemStoreBackend",
+                    "base_directory": cls.DOC_BASE_DIR,
+                },
+            },
+        )
 
     @classmethod
     def add_validation_results_store_backend(cls) -> None:
