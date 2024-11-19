@@ -19,7 +19,7 @@ def run() -> None:
     # Get the Great Expectations context
     context = gx.get_context(mode="file", project_root_dir=project_dir)
     # Define the run_id
-    run_id = RunIdentifier(run_name="Quality", run_time=datetime.now(tz=timezone.utc).strftime('%Y%m%dT%H%M%S.%f'))
+    run_id = RunIdentifier(run_name="Transaction Data Scan", run_time=datetime.now(tz=timezone.utc).strftime('%Y%m%dT%H%M%S.%f'))
     # Run the statistical checkpoints
     statistical_result = context.checkpoints.get("statistical_checkpoint").run(
         batch_parameters={"dataframe": df}, run_id=run_id,
