@@ -43,7 +43,7 @@ class GXInitiator:
             cls.context = gx.get_context(mode="file", project_root_dir=cls.PROJECT_DIR)
             cls.context.enable_analytics(enable=False)
             cls.add_data_docs_site()
-            cls.add_validation_results_store_backend()
+            cls.add_validation_results_store_backend()  # Comment out if you don't want to store validation results in a database
             cls.add_data_assets()
             cls.add_suites_and_validation_definitions()
             cls.add_checkpoint()

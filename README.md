@@ -2,6 +2,9 @@
 This is a sample project to demonstrate the use of `Great Expectations` to validate and document data quality.
 This example uses a sample transaction data set converting to `Pandas` DataFrame and then validate. It will automatically generate data documentation in HTML format and store the scanned result to postgres database.
 
+### Pre-requisites
+1. A Postgres database to save the scanned result.
+
 ### Installation
 To install the project, follow the steps below:
 1. Clone the repository
