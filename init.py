@@ -10,7 +10,7 @@ class GXInitiator:
     """Initialize the Great Expectations context and add data assets, suites, validation definitions and checkpoints."""
 
     # Define constants
-    PROJECT_DIR = os.path.join(os.environ['AIRFLOW_HOME'], "quality")
+    PROJECT_DIR = "quality"
     GX_DIR = os.path.join(PROJECT_DIR, "gx")
     SOURCE_NAME = "pandas"
     ASSET_NAME = "transactions"
