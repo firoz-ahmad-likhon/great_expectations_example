@@ -1,6 +1,7 @@
 import argparse
 import os
 import shutil
+from pathlib import Path
 import great_expectations as gx
 from dotenv import load_dotenv
 
@@ -22,8 +23,8 @@ class GXInitiator:
     """
 
     # Define constants
-    PROJECT_DIR = "quality"
-    GX_DIR = os.path.join(PROJECT_DIR, "gx")
+    PROJECT_DIR: Path = Path("quality")
+    GX_DIR: Path = PROJECT_DIR / "gx"
     SOURCE_NAME = "pandas"
     ASSET_NAME = "transactions"
     BATCH_NAME = "transactions batch"
