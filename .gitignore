@@ -1,4 +1,5 @@
 .idea
 *.log
 .env
+__pycache__
 gx
