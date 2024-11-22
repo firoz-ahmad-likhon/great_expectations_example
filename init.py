@@ -7,7 +7,19 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class GXInitiator:
-    """Initialize the Great Expectations context and add data assets, suites, validation definitions and checkpoints."""
+    """Initialize the Great Expectations context and add data assets, suites, validation definitions and checkpoints.
+
+    This class creates two checkpoints to validate the transactions data for statistical, completeness metrics of data quality. The checkpoints consist of four suites and validation definitions:
+    - distribution: This suite validates the distribution nature.
+    - missingness: This suite validates the completeness of the data.
+    - schema: This suite validates the schema definition of the data.
+    - volume: This suite validates the quantity of the data.
+
+    The checkpoints also have an action to generate data docs for the transactions data. It stores the validation results in a database store as well.
+
+
+    Once anything changes regarding context, it must be recreated using `python init.py --mode recreate`.
+    """
 
     # Define constants
     PROJECT_DIR = "quality"
@@ -22,6 +34,7 @@ class GXInitiator:
             name="Automatically data docs generation",
             site_names=[INGESTION_TIME_SITE_NAME],
         ),
+        # Add more actions here if needed
     ]
 
     @classmethod
