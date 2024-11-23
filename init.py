@@ -49,11 +49,11 @@ class GXInitiator:
 
         """
         # Check mode and delete project directory if mode=recreate
-        if mode == "recreate" and os.path.exists(cls.GX_DIR):
+        if mode == "recreate" and cls.GX_DIR.exists():
             shutil.rmtree(cls.GX_DIR)  # Delete the directory and all its contents
 
         # Initialize context only if the project directory does not exist
-        if not os.path.exists(cls.GX_DIR):
+        if not cls.GX_DIR.exists():
             cls.context = gx.get_context(mode="file", project_root_dir=cls.PROJECT_DIR)
             cls.context.enable_analytics(enable=False)
             cls.add_data_docs_site()
