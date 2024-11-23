@@ -31,8 +31,6 @@ def run() -> None:
     # Print out the final validation results
     logging.info(f"Validation results: {statistical_result.success and completeness_result.success}")
 
-    # Print out the docs URL
-    logging.info(f"Data Docs available at: {context.get_docs_sites_urls()[0]['site_url']}")
 
 if __name__ == '__main__':
     run()
