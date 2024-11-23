@@ -5,13 +5,14 @@ from init import GXInitiator
 class TestIntegrationGX:
     """Integration tests for context."""
 
+    def test_project_directory_exists(self, gxi: type[GXInitiator]) -> None:
+        """Assert that the Great Expectations project directory exists."""
+        assert gxi.GX_DIR.exists(), "GX directory should be created"
+
     def test_context_initialized(self, context: AbstractDataContext) -> None:
         """Assert that the Great Expectations context is initialized."""
         assert context is not None, "Context should be successfully initialized"
 
-    def test_project_directory_exists(self, gxi: type[GXInitiator]) -> None:
-        """Assert that the Great Expectations project directory exists."""
-        assert gxi.GX_DIR.exists(), "GX directory should be created"
 
     def test_doc_site_added(self, gxi: type[GXInitiator], context: AbstractDataContext) -> None:
         """Assert that the doc site is added to the context."""
